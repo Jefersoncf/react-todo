@@ -1,5 +1,6 @@
 
 import {useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const CreateTodo = () => {
@@ -25,14 +26,16 @@ const CreateTodo = () => {
 
   return ( 
     <section className='container'>
-      <button type='button' className='todo-btn todo-btn-back'>
-        button
-      </button>
+      <Link to='/'>
+        <button type='button' className='todo-btn todo-btn-back'>
+          button back
+        </button>
+      </Link>
 
       <section className='todo-data'>
-        <form onSubmit={handleSubmit} className='form-container'>
+        <form onSubmit={handleSubmit} className='form-container' noValidate>
           <label className='label' htmlFor='title'>
-            todo Title
+            Todo Title
           </label>
           <input type='text' name='title' value={todoInfo.title} 
             onChange={handleChange} className='input'/>
@@ -41,6 +44,7 @@ const CreateTodo = () => {
           </label>
           <input type='textarea' name='description' value={todoInfo.description}
             onChange={handleChange} className='input'/>
+            
           <button type='submit' className='todo-btn'>
             create todo
           </button>
