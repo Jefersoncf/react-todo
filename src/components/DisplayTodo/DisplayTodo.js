@@ -2,15 +2,16 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link} from 'react-router-dom';
+import UpdateTodo from '../UpdateTodo';
 import TodoLists from '../TodoLists';
 
-const DisplayTodo = () => {
+export function DisplayTodo() {
   const [infoTodo, setInfoTodo] = useState([]);
   const [id, setId] = useState('');
   const [update, setUpdate] = useState(false);
   const [modal, setModal] = useState(false);
 
-  useEffect(() => {
+  useEffect(() => { //rever para function normal
     axios.get('http://localhost:3000/api/todo-mern')
     .then((res) => {
       setInfoTodo(res.data);
@@ -35,7 +36,7 @@ const DisplayTodo = () => {
     axios.delete(`http://localhost:3000/api/todo-mern/${e.target.name}`);
     
     setInfoTodo((data) => {
-      return data.filter(todo => todo._id !== e.target.name);
+      return data.filter((todo) => todo._id !== e.target.name);
     });
   };
   
@@ -63,6 +64,8 @@ const DisplayTodo = () => {
             <p onClick={closeHandler} className='close'>
               &times;
             </p>
+
+            <UpdateTodo _id={id} closeHandler={closeHandler} updateHandler={updateHandler}/>
           </div>
         </section>
       ): (
@@ -73,3 +76,6 @@ const DisplayTodo = () => {
 };
 
 export default DisplayTodo;
+
+
+// pausa aqui do inicio
